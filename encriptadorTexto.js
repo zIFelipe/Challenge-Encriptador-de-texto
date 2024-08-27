@@ -1,46 +1,52 @@
-class encriptadorTexto{
-    constructor(){
-        this.reglasEncriptacion = {'e': 'enter', 'i': 'imes', 'a': 'ai', 'o': 'ober', 'u': 'ufat'};
-        this.reglasDesencriptado = {'enter': 'e', 'imes': 'i', 'ai': 'a', 'ober': 'o', 'ufat': 'u'};
-    }
 
-    encriptado(texto){
-        if (!this.textoValido(texto)) return;
-        return texto.replace(/[eioua]/g, letra => this.reglasEncriptacion[letra]);
-    }
 
-    desencriptado(textoEncriptado){
-        if (!this.textoValido(textoEncriptado)) return;
-        return textoEncriptado.replace(/enter|imes|ai|ober|ufat/g, encriptado => this.reglasDesencriptado[encriptado]);
-    }
+//vector que almacenas las cadenas encriptadas y las letras que corresponden a cada cadena.
+let reglasEncriptacion = {'e': 'enter', 'i': 'imes', 'a': 'ai', 'o': 'ober', 'u': 'ufat'};
+let reglasDesencriptado = {'enter': 'e', 'imes': 'i', 'ai': 'a', 'ober': 'o', 'ufat': 'u'};
 
-    textoValido(texto){
-        let validarTexto = /^[a-z\s]*$/;
-        let advertencia = document.getElementById('advertencia');
-        if (!validarTexto.test(texto)) {
-            advertencia.textContent = 'Solo se permiten letras minúsculas sin acentos ni caracteres especiales';
-            return false;
-        }
-        advertencia.textContent = '';
-        return true;
+    //funcion para encriptar el texto digitado
+function encriptado(texto){
+    //verifica si el texto es valido, si no lo es, detiene la operacion
+    if (!textoValido(texto)) return;
+    //reemplaza las letras en el texto con las cadenas que les corresponden, resultando en el texto encriptado
+    return texto.replace(/[eioua]/g, letra => reglasEncriptacion[letra]);
+}
+    //funcion para el desencriptado del texto digitado
+function desencriptado(textoEncriptado){
+     if (!textoValido(textoEncriptado)) return;
+    return textoEncriptado.replace(/enter|imes|ai|ober|ufat/g, encriptado => reglasDesencriptado[encriptado]);
+}
+//Funciona para validar las letras minusculas y los espacion, comprueba la cadena y veriifica lo anterior
+function textoValido(texto){
+    //permite solo letras minusculas y espacios
+    let validarTexto = /^[a-z\s]*$/;
+    let advertencia = document.getElementById('advertencia');
+    //si el texto no es valido, mostrará una advertencia con lo que no se debe introducir
+    if (!validarTexto.test(texto)) {
+        advertencia.textContent = 'Solo se permiten letras minúsculas sin acentos ni caracteres especiales';
+        return false;
     }
+    //si el texto es valido, limpia la advertencia y retorna true
+    advertencia.textContent = '';
+    return true;
 }
 
-// Funciones que ayudaran a manejar los eventos
-document.addEventListener('DOMContentLoaded', () => {
-    let encriptador = new encriptadorTexto();
 
-    document.getElementById('encriptar').addEventListener('click', () => {
+//Funciones para el manejo de eventos
+function manejoEventos(){
+    //boton de encriptar
+        document.getElementById('encriptar').addEventListener('click', () => {
         let entrada = document.getElementById('entrada').value;
-        let resultado = encriptador.encriptado(entrada);
+        let resultado = encriptado(entrada);
         document.getElementById('resultado').value = resultado || '';
     });
-
+    //boton de desencriptar
     document.getElementById('desencriptar').addEventListener('click', () => {
         let entrada = document.getElementById('entrada').value;
-        let resultado = encriptador.desencriptado(entrada);
+        let resultado = desencriptado(entrada);
         document.getElementById('resultado').value = resultado || '';
     });
+    //boton de copiar
 
     document.getElementById('copiar').addEventListener('click', () => {
         let resultado = document.getElementById('resultado');
@@ -48,5 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.execCommand('copy');
         alert('Texto copiado en el portapapeles');
     });
-});
+}
+//compila la función manejoEventos cuando el contenido del DOM está completamente cargado
+document.addEventListener('DOMContentLoaded', manejoEventos);
+
 
