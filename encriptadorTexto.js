@@ -30,7 +30,16 @@ function textoValido(texto){
     advertencia.textContent = '';
     return true;
 }
+function imagenOcultaR(){
+    let resultado = document.getElementById('resultado');
+    let imagenOculta = document.querySelector('.imagen-fondo');
 
+    if(resultado.value.trim() === ''){
+        imagenOculta.style.display = 'block';
+    }else{
+        imagenOculta.style.display = 'none';
+    }
+}
 
 //Funciones para el manejo de eventos
 function manejoEventos(){
@@ -39,12 +48,14 @@ function manejoEventos(){
         let entrada = document.getElementById('entrada').value;
         let resultado = encriptado(entrada);
         document.getElementById('resultado').value = resultado || '';
+        imagenOcultaR();
     });
     //boton de desencriptar
     document.getElementById('desencriptar').addEventListener('click', () => {
         let entrada = document.getElementById('entrada').value;
         let resultado = desencriptado(entrada);
         document.getElementById('resultado').value = resultado || '';
+        imagenOcultaR();
     });
     //boton de copiar
 
