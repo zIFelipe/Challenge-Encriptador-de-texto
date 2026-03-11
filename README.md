@@ -9,6 +9,7 @@ Justo en este apartado se encuentra un boton para retroceder a la pagina princip
 Luego tenemos el cuadro de textgo donde podemos ingresar las palabras o frases 
 
 ![Captura de pantalla 2024-08-27 201532](https://github.com/user-attachments/assets/09e1467a-bfd2-408b-8ca3-c274a18ba84e) 
+
 Ademas, el apartado de "resultado" se encuentra bloqueado 
 ya que dentro de este no hay nada  ![Captura de pantalla 2024-08-27 201557](https://github.com/user-attachments/assets/f05c7b00-1062-46f2-9134-c5c00299d47f)
 Tambien tenemso los botones de encriptar y desencriptar, lo que nos permitirá  hacer las funciones principales del programa.
